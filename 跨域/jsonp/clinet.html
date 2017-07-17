@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" type="text/html" charset="utf-8"/>
+		<title>JSONP客户端向远程服务器请求数据</title>
+		<script src="jquery-1.11.1.js"></script>
+	</head>
+
+	<body>
+		<h1 align="center">JSONP客户端向远程服务器请求数据</h1>
+		<hr size="1" color="red"/>
+		<button id="btn1">原生js请求</button>
+		<button id="btn2">Ajax请求</button>
+		<!--
+		    使用JSONP:如果页面加载时，就需要远程服务器提供的数据，最好用同步处理方式
+			          如果只是其中某一个方法被调用时需要远程服务器提供的数据，可以使用ajax异步处理方式
+
+			    方法:动态创建script元素，将请求URL作为src调用
+				      * url:请求地址及目录?参数1&参数2...&callback=func
+					    * func 为本地的一个方法，而本地将方法名作为参数的一部分请求服务器
+						* 服务接到请求后，会根据请求参数，字符串拼接一个jsonp（姑且叫做的格式吧）的数据，返回给客户端
+						* 客户端将接收到的数据放到新创建的<script src="xxx"><script>，会发生什么？
+						* 例如参数callback=getData,  服务器返回的数据: getData({"score":600.00})
+						*      客户端 <script>getData({"score":600.00})</script> ,
+						*             这句话的意思就是: 立即调用 getData 方法
+						*      而客户端原本有一个方法: function getDate(data){xxxx};
+						*      这样 我们就可以立即处理远程服务器返回的数量了
+						* 想想，是不是很牛逼,这样我们就可以  根据其它服务器提供的接口获取远程数据了
+						* 不好意思，有点小激动，高大上啊？赶快动手试试其中的乐趣吧
+				
+				Author:gzf
+		-->
+
+
+		<script>		
+				/*点击向远程服务器请求数据*/
+				$("#btn1").click(function(){
+					var script = document.createElement("script");
+					var url = "http://192.168.24.44:8000/jsonp/romate.php?sname=Tom&callback=getDate";
+					script.setAttribute("src",url);
+					document.getElementsByTagName("head")[0].appendChild(script);	
+				});
+				
+				//当服务器返回数据时,会自动调用该方法
+				function getDate(data){
+					alert(data.score);
+				}
+				
+				$("#btn2").click(function(){
+					$.ajax({
+						type:"get",
+						async:true,
+						url:"http://192.168.24.44:8000/jsonp/romate.php?sname=Tom",
+						dataType:"jsonp",
+						jsonp:"callback",
+						jsonpCallBack:"getDate",
+						success:function(data){
+							if(data != null){
+								alert(data.score);
+							}else{
+								alert("未获取到数据");
+							}
+						},
+						error:function(){
+							alert("远程服务器错误！");
+						}
+
+					});
+				
+				});
+				
+
+		</script>
+	</body>
+</html>

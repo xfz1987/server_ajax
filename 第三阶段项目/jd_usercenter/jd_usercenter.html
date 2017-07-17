@@ -1,0 +1,483 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>用户中心 — 京东商城</title>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" /> 
+        <link rel="Stylesheet"  href="basic.css">
+		<link rel="stylesheet" href="usercenter.css">
+    </head>
+    <body>
+    <!--页面顶部! -->
+    <div id="top">
+        <div id="top_box">
+            <img src="images/star.jpg" />
+            <a href="#">收藏京东</a>
+            <div class="rt">
+                <ul>
+                    <li>您好，欢迎来到京东！<a href="#" >[登录]</a> <a href="#" >[免费注册]</a></li>
+                    <li><b></b><a href="#" >我的订单</a></li>
+                    <li class="vip"><b></b><a href="#" >会员俱乐部</a></li>
+                    <li class="dakehu"><b></b><a href="#" >企业频道</a></li>
+                    <li class="app_jd" onmouseover="showElementById('app_jd_items',true);" onmouseout="showElementById('app_jd_items',false);">
+                        <b></b>
+                        <label class="rt">
+                            <a href="#" >手机京东</a>
+                        </label>
+                        <div id="app_jd_items" onmouseover="showTopTag(this,true);" onmouseout="showTopTag(this,false);">
+                            <div class="app">
+                                <h3>京东客户端</h3>
+                                <a href="#" class="app"></a>
+                                <a href="#" class="android"></a>
+                            </div>
+                            <div class="bank">
+                                <h3>网银钱包客户端</h3>
+                                <a href="#" class="app"></a>
+                                <a href="#" class="android"></a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="service"  onmouseover="showElementById('service_items',true);" onmouseout="showElementById('service_items',false);">
+                        <b></b>
+                        <label class="rt">
+                            <a> 客户服务</a>
+                        </label>
+                        <ul id="service_items"  onmouseover="showTopTag(this,true);" onmouseout="showTopTag(this,false);">
+                            <li><a href="#">帮助中心</a></li>
+                            <li><a href="#">售后服务</a></li>
+                            <li><a href="#">在线客服</a></li>
+                            <li><a href="#">投诉中心</a></li>
+                            <li><a href="#">客服邮箱</a></li>
+                        </ul>
+                    </li>
+                    <li class="site_nav" onmouseover="showElementById('site_nav_items',true);" onmouseout="showElementById('site_nav_items',false);">
+                        <b></b>
+                        <label class="rt">
+                            <a >网站导航</a>
+                        </label>
+                        <div id="site_nav_items"  onmouseover="showTopTag(this,true);" onmouseout="showTopTag(this,false);">
+                            <h3>特色栏目</h3>
+                            <ul>
+                                <li><a href="#">京东通信</a></li>
+                                <li><a href="#">校园之星</a></li>
+                                <li><a href="#">视频购物</a></li>
+                                <li><a href="#">京东社区</a></li>
+                                <li><a href="#">在线读书</a></li>
+                                <li><a href="#">装机大师</a></li>
+                                <li><a href="#">京东 E 卡</a></li>
+                                <li><a href="#">家装城</a></li>
+                                <li><a href="#">搭配购</a></li>
+                                <li><a href="#">我喜欢</a></li>
+                                <li><a href="#">游戏社区</a></li>
+                            </ul>
+                            <div></div>
+                            <h3>企业服务</h3>
+                            <ul>
+                                <li><a href="#">企业采购</a></li>
+                                <li><a href="#">办公直通车</a></li>
+                            </ul>
+                            <div></div>
+                            <h3>旗下网站</h3>
+                            <ul>
+                                <li><a href="#">English Site</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+    <!--LOGO和搜索框! -->
+    <div id="top_main">
+        <a href="#" class="lf"><img src="images/logo-201305.png" alt="LOGO" /></a>
+        <div id="search_box" class="lf">
+            <div id="search_helper">
+                <p>卫<b>33衣</b><span>约1120个商品</span></p>
+                <p>卫<b>衣</b><span>约1120个商品</span></p>
+                <ul>
+                    <li>在<b>男装 > 卫衣</b>分类中搜索<span>约11731个商品</span></li>
+                    <li>在<b>女装 > 卫衣</b>分类中搜索<span>约10253个商品</span></li>
+                </ul>
+                <p>卫<b>新</b><span>约1120个商品</span></p>
+                <p>卫<b>生纸</b><span>约5100个商品</span></p>
+                <p>卫<b>浴</b><span>约12758商品</span></p>
+                <p>卫<b>裤</b><span>约1120个商品</span></p>
+                <p>卫<b>衣 套装</b><span>约1486个商品</span></p>
+                <p>卫<b>衣 男</b><span>约210个商品</span></p>
+                <p>卫<b>生纸 套装</b><span>约631个商品</span></p>
+            </div>
+            <div class="search">
+                <input id="txtSearch" type="text" class="text" onkeyup="showElementById('search_helper',true);"
+                onblur="showElementById('search_helper',false);"/>
+                <input class="button" name="" type="button" value="搜索" />
+            </div>
+            <div class="hot_words">
+                <span>热门搜索：</span>
+                <a href="#">家纺11月大促</a>
+                <a href="#">彩虹电热毯</a>
+                <a href="#">博洋家纺</a>
+                <a href="#">霞珍</a>
+                <a href="#">床垫床褥</a>
+                <a href="#">九洲鹿被子</a>
+                <a href="#">南极人家纺</a>
+            </div>
+        </div>
+        <div id="my_jd" class="lf">
+            <div class="my_jd_mt" onmouseover="showElementById('my_jd_items',true);" onmouseout="showElementById('my_jd_items',false);">
+                我的京东
+                <b></b>
+            </div>
+            <div id="my_jd_items">
+                <p>您好，请<a href="#">登录</a></p>
+                <ul  class="lf">
+                    <li><a href="#">待处理订单</a></li>
+                    <li><a href="#">咨询回复</a></li>
+                    <li><a href="#">降价商品</a></li>
+                    <li><a href="#">返修退换货</a></li>
+                    <li><a href="#">优惠券</a></li>
+                </ul>
+                <ul  class="lf">
+                    <li><a href="#">我的关注 &gt;</a></li>
+                    <li><a href="#">我的京豆 &gt;</a></li>
+                    <li><a href="#">我的理财 &gt;</a></li>
+                    <li><a href="#">我的白条 &gt;</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="settle_up" class="lf">
+            <div class="settle_up_mt" onmouseover="showElementById('settle_up_items',true);" onmouseout="showElementById('settle_up_items',false);">
+                去购物车结算
+                <b></b>
+            </div>
+            <div id="settle_up_items">
+                <div id="no_goods">
+                    <b></b>
+                    购物车中还没有商品，赶紧去选购吧
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+    <!--主导航 -->
+    <div id="nav" >
+        <div id="category">
+            <div id="cate_mt"  onmouseover="showElementById('all_cate',true);"  onmouseout="showElementById('all_cate',false);">
+                <a href="#">全部商品分类</a>
+                <span></span>
+            </div>
+            <div id="all_cate" onmouseover="showElementById('all_cate',true);"  onmouseout="showElementById('all_cate',false);">
+                <div class="cate_item" onmouseover="showNaviSubItems(this);">
+                    <h3>
+                        <a href="#">图书</a><span>、</span>
+                        <a href="#">音像</a><span>、</span>
+                        <a href="#">数字商品</a>
+                    </h3>
+                    <div class="sub_cate_box">
+                        <div class="sub_cate_items">
+                            <div>
+                                <a href="#">电子书</a>
+                                <p>
+                                    <a href="#">免费</a>
+                                    <a href="#">小说</a>
+                                    <a href="#">励志与成功</a>
+                                    <a href="#">婚恋/两性</a>
+                                    <a href="#">文学</a>
+                                    <a href="#">经营</a>
+                                    <a href="#">畅读VIP</a>
+                                </p>
+                            </div>
+                            <div>
+                                <a href="#">数字音乐</a>
+                                <p>
+                                    <a href="#">通俗流行</a>
+                                    <a href="#">古典音乐</a>
+                                    <a href="#">摇滚说唱</a>
+                                    <a href="#">爵士蓝调</a>
+                                    <a href="#">乡村民谣</a>
+                                    <a href="#">有声读物</a>
+                                </p>
+                            </div>
+                            <div>
+                                <a href="#">音像</a>
+                                <p>
+                                    <a href="#">音乐</a>
+                                    <a href="#">影视</a>
+                                    <a href="#">教育音像</a>
+                                    <a href="#">游戏</a>
+                                </p>
+                            </div>
+                            <div>
+                                <a href="#">文艺</a>
+                                <p>
+                                    <a href="#">小说</a>
+                                    <a href="#">文学</a>
+                                    <a href="#">青春文学</a>
+                                    <a href="#">传记</a>
+                                    <a href="#">艺术</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="sub_cate_banner">
+                            <div><img src="images/cate_banner_01.jpg" /></div>
+                            <div><img src="images/cate_banner_02.jpg" /></div>
+                            <div>
+                                <p>推荐品牌出版商/书店</p>
+                                <ul>
+                                    <li><a href="#">中华书局</a></li>
+                                    <li><a href="#">人民邮电出版社</a></li>
+                                    <li><a href="#">上海世纪出版股份有限公司</a></li>
+                                    <li><a href="#">电子工业出版社</a></li>
+                                    <li><a href="#">三联书店</a></li>
+                                    <li><a href="#">浙江少年儿童出版社</a></li>
+                                    <li><a href="#">人民文学出版社</a></li>
+                                    <li><a href="#">外语教学与研究出版社</a></li>
+                                    <li><a href="#">中信出版社</a></li>
+                                    <li><a href="#">化学工业出版社</a></li>
+                                    <li><a href="#">北京大学出版社</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="close">×</div>
+                    </div>
+                </div>
+                <div class="cate_item"  onmouseover="showNaviSubItems(this);">
+                    <h3>
+                        <a href="#">家用电器</a>
+                    </h3>
+                    <div class="sub_cate_box">
+                        <div class="sub_cate_items">
+                            <div>
+                                <a href="#">大家电</a>
+                                <p>
+                                    <a href="#">家电爆品</a>
+                                    <a href="#">平板电视</a>
+                                    <a href="#">空调</a>
+                                    <a href="#">冰箱</a>
+                                    <a href="#">洗衣机</a>
+                                    <a href="#">家庭影院</a>
+                                    <a href="#">DVD</a>
+                                    <a href="#">迷你音响</a>
+                                    <a href="#">烟机/灶具</a>
+                                    <a href="#">热水器</a>
+                                    <a href="#">消毒柜/洗碗机</a>
+                                    <a href="#">酒柜/冷柜</a>
+                                    <a href="#">家电配件</a>
+                                </p>
+                            </div>
+                            <div>
+                                <a href="#">生活电器</a>
+                                <p>
+                                    <a href="#">取暖电器</a>
+                                    <a href="#">净化器加湿器</a>
+                                    <a href="#">扫地机器人</a>
+                                    <a href="#">吸尘器</a>
+                                </p>
+                            </div>
+                            <div>
+                                <a href="#">厨房电器</a>
+                                <p>
+                                    <a href="#">电压力锅</a>
+                                    <a href="#">电饭煲</a>
+                                    <a href="#">豆浆机</a>
+                                </p>
+                            </div>
+                            <div>
+                                <a href="#">五金家电</a>
+                                <p>
+                                    <a href="#">电动工具</a>
+                                    <a href="#">手动工具</a>
+                                    <a href="#">仪器仪表</a>
+                                    <a href="#">浴霸/排气扇</a>
+                                    <a href="#">灯具</a>
+                                    <a href="#">洁身器</a>
+                                    <a href="#">LED灯</a>
+                                    <a href="#">水槽</a>
+                                    <a href="#">淋浴花洒</a>
+                                    <a href="#">厨卫五金</a>
+                                    <a href="#">家具五金</a>
+                                    <a href="#">门铃</a>
+                                    <a href="#">电气开关</a>
+                                    <a href="#">插座</a>
+                                    <a href="#">电工电料</a>
+                                    <a href="#">监控安防</a>
+                                    <a href="#">电线/线缆</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="sub_cate_banner">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="nav_items">
+            <ul>
+                <li><a href="#">首页</a></li>
+                <li><a href="#">服装城</a></li>
+                <li><a href="#">食品</a></li>
+                <li><a href="#">团购</a></li>
+                <li><a href="#">夺宝岛</a></li>
+                <li><a href="#">闪购</a></li>
+                <li><a href="#">金融</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+    <!--主体内容! -->
+    <div id="main">
+		<div class="nav">
+			<h2>我的京东</h2>
+			<ul>
+				<li><a class="current" id="order" href="javascript:void(0)">我的订单</a></li>
+				<li><a id="statistic" href="javascript:void(0)">消费统计</a></li>
+				<li><a id="lottery" href="javascript:void(0)">幸运抽奖</a></li>
+			</ul>
+		</div>
+		<div class="body">
+			<div id="orderContainer">
+				<table>
+					<thead>
+						<tr>
+							<th style="width: 50%">订单信息</th>
+							<th>收货人</th>
+							<th>订单金额</th>
+							<th>
+								<select>
+									<option value="">最近一个月</option>
+									<option value="">最近三个月</option>
+									<option value="">最近半年</option>
+								</select>
+							</th>
+							<th>
+								<select id="sel_order_state">
+									<option value="1">全部状态</option>
+									<option value="2">等待付款</option>
+									<option value="3">等待发货</option>
+									<option value="4">派货中</option>
+									<option value="5">订单完成</option>
+									<option value="6">已删除</option>
+								</select>
+							</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+					<!--<tr class="orderHeader">
+							<td colspan="6">
+								<span>订单编号：12345678</span>
+								<a href="#url">FOX 旗舰店</a>
+							</td>
+						</tr>
+						<tr class="orderBody">
+							<td>
+								<img src="img/prod1.jpg" title="皮带">
+								<img src="img/prod2.jpg" title="皮带打孔器">
+							</td>
+							<td>丁当</td>
+							<td>￥21.90<br>在线支付</td>
+							<td>2015-5-15<br>10:22:35</td>
+							<td>等待收货</td>
+							<td>查看<br>确认收货<br>取消订单</td>
+						</tr>-->
+					</tbody>
+				</table>	
+				<ul class="pager">
+					<!--
+					<li class="current"><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					-->
+				</ul>
+			</div>
+			<div id="statisticContainer" style="display:none;">
+				<canvas id="statCanvs" width="800" height="500">
+					您的浏览器不支持Canvas
+				</canvas>
+			</div>
+			<div id="lotteryContainer" style="display:none;">
+				<canvas id="loteryCanvas" width="600" height="600">
+                    您的浏览器不支持Canvas
+                </canvas><br>
+                <button>加载中请稍后...</button>
+			</div>
+		</div>      
+    </div>
+    <div class="clear"></div>
+
+    <!--购物指南、配送方式等! -->
+    <div id="foot_box">
+        <p class="shopping_guide"></p>
+        <ul>
+            <li><b>购物指南</b></li>
+            <li><a href="#">购物流程</a></li>
+            <li><a href="#">会员介绍</a></li>
+            <li><a href="#">团购/机票</a></li>
+            <li><a href="#">常见问题</a></li>
+            <li><a href="#">大家电</a></li>
+            <li><a href="#">联系客服</a></li>
+        </ul>
+        <p class="send_type"></p>
+        <ul>
+            <li><b>配送方式</b></li>
+            <li><a href="#">上门自提</a></li>
+            <li><a href="#">211限时达</a></li>
+            <li><a href="#">配送服务查询</a></li>
+            <li><a href="#">配送费收取标准</a></li>
+            <li><a href="#">海外配送</a></li>
+        </ul>
+        <p class="pay_type"></p>
+        <ul>
+            <li><b>支付方式</b></li>
+            <li><a href="#">货到付款</a></li>
+            <li><a href="#">在线支付</a></li>
+            <li><a href="#">分期付款</a></li>
+            <li><a href="#">邮局汇款</a></li>
+            <li><a href="#">公司转账</a></li>
+        </ul>
+        <p class="sale_service"></p>
+        <ul>
+            <li><b>售后服务</b></li>
+            <li><a href="#">售后政策</a></li>
+            <li> <a href="#">价格保护</a></li>
+            <li><a href="#">退款说明</a></li>
+            <li><a href="#">返修/退换货</a></li>
+            <li><a href="#">取消订单</a></li>
+        </ul>
+        <p class="special_service"></p>
+        <ul>
+            <li><b>特色服务</b></li>
+            <li><a href="#">夺宝岛</a></li>
+            <li><a href="#">DIY装机</a></li>
+            <li><a href="#">延保服务</a></li>
+            <li><a href="#">京东E卡</a></li>
+            <li> <a href="#">节能补贴</a></li>
+            <li> <a href="#">京东通信</a></li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+
+    <!--页面底部! -->
+    <div id="footer">
+        <div class="links"><a href="#">关于我们</a>|<a href="#">联系我们</a>|<a href="#">人才招聘</a>|<a href="#">商家入驻</a>|<a href="#">广告服务</a>|<a href="#">手机京东</a>|<a href="#">友情链接</a>|<a href="#">销售联盟</a>|<a href="#">京东社区</a>|<a href="#">京东公益</a></div>
+        <div class="copyright">北京市公安局朝阳分局备案编号110105014669  |  京ICP证070359号  |  互联网药品信息服务资格证编号(京)-非经营性-2011-0034<br />
+            <a href="#">音像制品经营许可证苏宿批005号 </a> |  出版物经营许可证编号新出发(苏)批字第N-012号  |  互联网出版许可证编号新出网证(京)字150号<br />
+            <a href="#">网络文化经营许可证京网文[2011]0168-061号 </a> Copyright © 2004-2014 京东JD.com 版权所有 <br />
+            京东旗下网站：
+            <a href="#">English Site</a> <a href="#">拍拍网</a> <a href="#">网银在线</a>
+        </div>
+        <div class="authentication">
+            <a href=""><img src="images/jy.jpg" width="108" height="40" /></a>
+            <a href=""><img src="images/kx.jpg" width="108" height="40" /></a>
+            <a href=""><img src="images/cy.jpg" width="108" height="40" /></a>
+            <a href=""><img src="images/cx.jpg" width="112" height="40" /></a>
+        </div>
+    </div>
+	<script src="js/jd_usercenter.js"></script>
+	<script src="js/jquery-1.11.1.js"></script>
+	<script src="js/myjs.js"></script>
+    </body>
+</html>

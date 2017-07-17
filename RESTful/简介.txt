@@ -1,0 +1,34 @@
+RESTFUL: 表现层状态转化 Resource Representational State Transfer
+它是一种接口规范
+
+* Resource: 资源，URI
+    文本、图片、音频、服务...网络上的实体
+
+* Representaitional: 表现层
+  文本: txt、html、xml、json、二进制
+  图片: jpg、png、base64
+
+  * 具体的表现形式 http协议的 content-type和accept
+  * Case: book是一个资源，获取不同的格式
+
+* State Transfer：表现层状态转化
+  get/post/put/delete
+
+
+* Restful规范
+ get -> 查询操作
+ post -> 添加/修改操作
+ put -> 修改操作
+ delete -> 删除操作
+
+* URL设计 与 SpringMVC很好的结合起来了
+  /模块/资源/{标示}/集合1/...
+  /user/{uid}/firends -> 好友列表
+  /user/{uid}/followers -> 关注者列表
+
+* 秒杀API的URL设计
+  GET/seckill/list          		秒杀列表
+  GET/seckill/{id}/detail   		详情页
+  GET/seckill/time/now      		系统时间
+  POST/seckill/{id}/exposer 		暴露秒杀
+  POST/seckill/{id}/{md5}/execution 执行秒杀

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" type="text/html" charset="utf-8"/>
+		<title>XXX</title>
+		<script src="../jquery-1.11.3.js"></script>
+	</head>
+
+	<body>
+		<h1 align="center">响应式/自适应式网页</h1>
+		<h2>使用AJAX异步加载不同的JS文件来实现</h2>
+		<div id="msg">...<div>
+		
+		<script>
+			//根据浏览器宽度的不同，异步加载不同的JS文件
+			var url = null;
+			var w = $(window).width();
+			if(w>=1024){
+				url = "js/pc.js";
+			}else if(w >=480){
+				url = "js/pane.js";
+			}else{
+				url = "js/phone.js";
+			}
+			
+			$.getScript(url,function(){
+				console.log("外部JS加载完成...");
+			});
+		</script>
+	</body>
+</html>

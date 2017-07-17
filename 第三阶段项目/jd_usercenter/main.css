@@ -1,0 +1,50 @@
+#main{
+	background:#F7F7F7;
+}
+#main_left,#main_right{
+	float:left;
+}
+#main_left{
+	width:210px;
+}
+#main_left>h3{
+	font-size:18px;
+	color:#666;
+	text-align:center;
+}
+#main_left>ul>li{
+	text-align:center;
+	margin-top:5px;
+	margin-left:20px;
+}
+#main_left>ul>li>a:hover{
+	cursor:pointer;
+	color:#e4393c;
+}
+#main_right{
+	border:1px solid #DFDFDF;
+	margin-top:5px;
+	width:970px;
+}
+#main_right ul.order_info{
+	height:25px;
+	line-height:25px;
+	background:#E7E7E7;
+	color:#333;
+	font-weight:bold;
+}
+#main_right ul.order_info>li{
+	float:left;
+}
+#main_right ul.order_info>li{
+	width:92px;
+	border:1px solid red;
+	text-align:center;
+}
+#main_right ul.order_info>li.first{
+	width:490px;
+}
+#main_right div.order_list{
+	border:1px solid red;
+}
+#mai

@@ -1,0 +1,27 @@
+* XML是一种可扩展标记语言
+  * 是一种描述数据的字符串格式
+  * 类似于HTML，用于传输数据，而非实现数据
+  * XML标签没有预定义
+  * 简化数据的传输和共享
+  * HTML XML XHTML DHTML的关系
+    * 
+
+* 创建XML文件
+  * 文件后缀名为 .xml
+  * 声明必须为<?xml开头,以?>结束
+  * 声明必须从文档的0行0列位置开始
+  * 属性
+    * version : 1.0，必须使用，只有1.0
+    * encoding: UTF-8，默认值就是UTF-8
+    * standalone : true/false 指定文档是否独立，是否需要依赖外部文件
+      * 例如:专业数据中，xml需要与scma一起配合使用,
+              scma也是一个xml文件，结构与要配合的xml保持一致
+	      scma规定了xml各节点中数据字段的数据类型、长度等信息
+
+    例:<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+
+* js解析XML
+  * DOM分三部分 : 核心DOM   HTMLDOM  XMLDOM
+  * 方式一:将XML转换成XMLDOM树
+  * 方式二:Ajax获取响应主体消息以responseXML

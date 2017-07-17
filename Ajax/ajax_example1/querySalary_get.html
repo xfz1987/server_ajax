@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" type="text/html" charset="utf-8"/>
+		<title>GET请求</title>
+	</head>
+
+	<body>
+		<h1 align="center">查询工资</h1>
+		<hr size="1" color="red"/>
+		员工编号:<input type="text" name="id" onblur="getSalary(value)"/>	<br/>
+		员工工资:<b id="result">...</b>
+	</body>
+
+	<script>
+		function getXHR(){
+			return (window.XMLHttpRequest != undefined) ? (new XMLHttpRequest()) : (new ActiveXObject("Microsoft.XMLHttp"));
+		}
+
+		function getSalary(id){
+			var xhr = getXHR();
+			xhr.onreadystatechange = function(){
+				var result = document.getElementById("result");
+				if(xhr.readyState == 4){
+					if(xhr.status == 200){
+						var salary = xhr.responseText;
+						result.innerHTML = (salary == -1 ? "查询不到该员工的信息，请确认员工编号是否正确" : salary);
+					}else{
+						alert("服务器正在维修中,请稍后查询...");
+					}					
+				}else{
+					result.innerHTML = "正在查询...";
+				}
+			};
+			xhr.open("get","http://localhost:8000/test/ajax_example1/getSalary_get.php?id="+id,true);
+			//设置请求头
+			xhr.setRequestHeader("User","fengge");
+			//设置Cookie
+			//xhr.setRequestHeader("Cookie","loc=bj");
+			xhr.send(null)
+		}
+	</script>
+</html>

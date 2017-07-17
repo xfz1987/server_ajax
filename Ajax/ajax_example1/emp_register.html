@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" type="text/html" charset="utf-8"/>
+		<title>员工注册</title>
+	</head>
+
+	<body>
+		<h1 align="center">员工注册</h1>
+		<hr size="1" color="red"/>
+		<form action="emp_register.do.php" method="post">
+			员工编号：<input type="text" name="id" onblur="checkId(value)"/>&nbsp;<span id="id_msg"></span><br/>
+			输入密码：<input type="password" name="pwd" onblur="checkPwd(value)"/>&nbsp;<span id="pwd_msg"></span>
+		</form>	
+
+		<script>
+			function getXHR(){
+				return (window.XMLHttpRequest != undefined) ? (new XMLHttpRequest()) : (new ActiveXObject("Microsoft.XMLHttp"));
+			}
+
+			function checkId(id){
+				var span = document.getElementById("id_msg");
+				//为等待Ajax响应增加样式
+				span.innerHTML = "<img src='loading_ajax.gif' width='30'/>正在查询...请稍后";
+
+				var xhr = getXHR();
+				xhr.onreadystatechange = function(){				
+					if(xhr.readyState == 4){
+						if(xhr.status == 200){
+							var result = xhr.responseText;
+							span.innerHTML = (result == 1 ? "员工编号已存在!" : "该员工编号可以使用!");
+							span.style.color = (result == 1 ? "red" : "green");
+						}else{
+							alert("系统错误，请联系管理员...");
+						}					
+					}
+				};
+				xhr.open("post","http://localhost:8000/test/ajax_example1/emp_register.do.php",true);
+				//设置请求头的内容编码方式，因为Ajax发送的POST请求默认的内容编码方式是 text/plain，
+				//会造成服务器接收不到请求主体数据
+				xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
+				xhr.send("id=" + id);
+			}
+		</script>
+	</body>
+</html>

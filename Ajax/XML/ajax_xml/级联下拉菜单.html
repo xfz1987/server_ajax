@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" type="text/html" charset="utf-8"/>
+		<title>级联下拉列表</title>
+	</head>
+
+	<body>
+		<h1 align="center">级联下拉列表</h1>
+		<hr size="1" color="red"/>
+		<select id="provinces">
+			<option value="-1">--请选择省份--</option>
+		</select>
+		<select id="cities">
+			<option value="-1">--请选择城市--</option>
+		</select>
+		<script>
+			var doc = document;
+			window.onload = initProvinces;
+
+			function initProvinces(){
+				var xhr = getXHR();
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState == 4){
+						if(xhr.status == 200){
+							doProResponse(xhr.responseXML);
+						}else{
+							alert("系统错误，请联系管理员!");
+						}
+					}
+				};
+				xhr.open("get","http://localhost:8000/test/ajax_select/getProvince.php",true);
+				xhr.send(null);
+			}
+			
+			function doProResponse(xmlDoc){
+				var proEle = doc.getElementById("provinces");
+				var pro_list = xmlDoc.getElementsByTagName("province");
+				for(var i=0,len=pro_list.length;i<len;i++){
+					var p = pro_list[i];
+					var pid = p.getAttribute("pid");
+					var pname = p.firstElementChild.innerHTML;
+					proEle.add(new Option(pname,pid));								
+				}
+			}
+
+			doc.getElementById("provinces").onchange = function(){
+				var proEle = doc.getElementById("provinces");
+				var children = doc.querySelectorAll("#provinces>option");
+				var pid;
+				for(var i=0;i<children.length;i++){
+					var child = children[i];
+					if(child.selected){
+						pid = child.value;
+						break;
+					}
+				}
+
+				var xhr = getXHR();
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState == 4){
+						if(xhr.status == 200){
+							doCityResponse(xhr.responseXML);
+						}else{
+							alert("系统错误，请联系管理员!");
+						}
+					}		
+				};
+
+				xhr.open("post","http://localhost:8000/test/ajax_select/getCity.php",true);
+				//设置请求头的内容编码方式，因为Ajax发送的POST请求默认的内容编码方式是 text/plain，
+				//会造成服务器接收不到请求主体数据
+				xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8");
+				xhr.send("pid="+pid);
+			}
+
+			function doCityResponse(xmlDoc){
+				var ctEle = doc.getElementById("cities");
+				var children = ctEle.querySelectorAll("option");
+				//先清空选项
+				for(var i=1,len=children.length;i<len;i++){
+					ctEle.removeChild(children[i]);
+				}
+				
+				var city_list = xmlDoc.getElementsByTagName("city");
+				for(var i=0,len=city_list.length;i<len;i++){
+					var city = city_list[i];
+					var cid = city.getAttribute("cid");
+					var cname = city.firstElementChild.innerHTML;
+					ctEle.add(new Option(cname,cid));								
+				}
+			}
+
+			function getXHR(){
+				return (window.XMLHttpRequest != undefined) ? (new XMLHttpRequest()) : (new ActiveXObject("Microsoft.XMLHttp"));
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,107 @@
+1、缓存问题:
+	当采用get方式向服务器请求时，ie浏览器会先尝试
+从缓存当中查找数据，如果找到，不再向服务器发请求。
+	解决方式:
+		在请求地址后面添加一个随机数。
+		采用post方式向服务器发请求，也可以解决
+		这个问题。
+2、采用post方式发请求
+	step1 获得XMLHttpRequest对象
+	var xhr = getXhr();
+	step2 发送请求
+		xhr.open('post','check_username.do',true);
+		//在默认情况下，xhr对象生成的http请求数据
+		//包不会包含content-type消息头。
+		//setRequestHeader的作用是，在生成的
+		//http请求数据包当中，添加content-type消息头。
+		xhr.setRequestHeader('content-type',
+		'application/x-www-form-urlencoded');
+		xhr.send('username=zs');
+	step3 服务器处理请求
+	step4 在监听器里面处理服务器返回的数据
+3、编码问题
+	1)如果链接地址包含了中文，如何处理？
+		浏览器都会对链接地址中的中文进行
+	编码(一定会采用utf-8进行编码)
+		解决方式:
+			可以通过修改tomcat_home/conf/
+			server.xml文件，添加"URIEncoding="utf-8"
+	2)如果链接地址包含了中文参数，如何处理？
+		浏览器会对中文参数进行编码，具体采用
+	何种编码，要看打开这个页面的编码是什么。
+		解决方式:
+			step1:
+				修改tomcat_home/conf/
+			server.xml文件，添加"URIEncoding="utf-8"
+			step2:
+				在jsp文件当中，添加
+				<%@page pageEncoding="utf-8" 
+contentType="text/html;charset=utf-8"%>
+	3)在ajax应用当中，当使用get方式向服务器
+	发送请求时，ie使用gbk编码对请求数据进行编码,
+	firefox,chrome使用utf-8进行编码。
+		解决方式:
+			step1 
+				修改tomcat_home/conf/
+			server.xml文件，添加"URIEncoding="utf-8"
+			step2
+				对请求地址使用encodeURI函数进行处理，
+			该函数会对地址中的中文进行编码(采用utf-8)。
+	如果使用post方式向服务器发请求，浏览器都会采用
+	utf-8编码。
+		解决方式：
+			step1 setCharacterEncoding("utf-8");
+
+4、json
+	1)json是什么?
+		javascript object notation。
+		一个轻量级(相对于xml,
+		性能和使用的方便性要更好)的数据交换标准。
+	2)json的基本语法?
+		a, 定义一个对象
+		{属性名:属性值,属性名2:属性值2...}
+		注意：
+			属性名要用''引起来。
+			属性值如果是字符串，要用''引起来。
+			属性值可以是
+			string,number,boolean,null,Object,Array
+		比如:
+			{'name':'zs','age',22}
+			{'name':'ww','address':
+				{
+					'city':'bj',
+					'street':'ca'
+				}
+			}
+		b,定义一个数组
+			[{},{},{}]
+	3)使用json交换数据
+		a, java对象转换成json字符串
+			//obj要转换的java对象
+			JSONObject jsonObj = JSONObject.fromObject(obj);
+			jsonObj.toString();
+			如果要转换是java对象组成的数组或者是集合，
+			使用：
+			JSONArray jsonObj = 
+			JSONArray.fromObject(stocks);
+		    jsonObj.toString();
+		b, 将json字符串转换成js对象
+			 prototype: 是一个javascript文件，里面提供了
+			大量的实用的函数。
+				$(id): 相当于document.getElementById(id);
+				$F(id):相当于document.getElementById(id).value;
+				$(id1,id2...):返回一个数组，每一个元素使用
+				document.getElementById进行查找。
+				strip():除掉字符串两端的空格。 
+				evalJSON(): 将json字符串转换成一个javascript
+				对象。
+	 	在页面的某个区域，每隔5秒钟，
+	 显示推荐的一支股票的信息。
+		练习： 改为每次推荐三支股票。
+	4) 如何处理日期
+		step1 先写一个日期转换器类,必须实现
+		JsonValueProcessor接口。
+		step2 注册这个转换器类
+
+
+			

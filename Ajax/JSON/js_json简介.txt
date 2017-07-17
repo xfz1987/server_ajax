@@ -1,0 +1,165 @@
+一、json语法：
+
+1.简单值:使用与JavaScript相同的语法，可以在json中表示字符串数值、布尔值和null
+        但是不支持underdefined。
+2.对象:表示的是一组无序的键值对，而每个键值对中的值可以是简单值，也可以是复杂数据类型的值。
+ js中:
+	var person = {
+		name:"kobe",
+		age:38
+	};
+
+       (要给属性加双引号)
+	var object = {
+		"name":"kobe",
+		"age":38
+	};
+
+ json:(对象的属性必须加双引号)
+	{
+		"name":"kobe",
+		"age":38
+	}, 
+	
+        {
+		"name":"kobe",
+		"age":38,
+		"job":{
+			"style":"NBA",
+			"location":"USA"
+		}
+	
+	}
+
+
+注意:与js相比，①没有声明变量；②没有末尾的分号  ③key必须双引号
+                ④value 可以是字符串(必须双引号)、数据、boolean、数组、null
+                       不能 new XXX() 、function(){}
+
+3.数组:表示一组有序的值的列表，数组的值可以是任意类型:简单值、对象或数组。
+
+  注意:json数组没有变量和分号
+  {
+	"title":"java",
+	"authors":["fengge"]
+  },
+  {
+	"title":"c++",
+	"authors":["fengge","gaoge"]
+  }
+
+二、解析与序列化
+    拿上面的例子，获得第二本书的名字,假设将解析json数据结构后得到的对象保存到了变量books中
+    books[1].title
+    在DOM结构中查找数据的代码:
+    doc.getElementsByTagName("books")[1].getAttribute("title");
+
+
+    1.json对象
+     json对象有两种方法:stringify()和parse()
+     stringify():把js对象序列化为json字符串
+     parse():把json字符串解析为原生js值
+
+
+     ①举例:stringify()
+     var book = {
+		  title:"java",
+		  authors:["fengge","gaoge"],
+		  edit:undefined,
+		  year:2011		  
+     };
+     //默认情况下，stringify()输出的json字符串不包含任何空格字符或缩进,而且会跳过undefined	
+     var jsonText = JSON.stringify(book);
+     
+     结果:{"title":"java","authors":["fengge","gaoge"],"year":2011}
+
+    ②举例:parse()	
+     var bookCopy = JSON.parse(jsonText);
+
+
+    2.序列化选项
+      两个参数:过滤器(数组或函数)  和   是否允许在json字符串中保留缩进
+
+      ①过滤结果（使用上面的book例子）
+	例1：
+	    var jsonText = JSON.stringify(book,["title","year"]);
+	    结果：只保留了title和year这两个属性
+	    {"title":"java","year":2011}
+	例2:
+	    var jsonText = JSON.stringify(book, function(key,value){
+		switch(key){
+			case "authors":
+				return value.join("-");
+			case "title":
+				return undefined;
+			case "year":
+				return 2888;
+			default:
+				return value;
+		}
+	    });
+
+	    结果:undefined,title直接被删掉了，通过过滤器可以改变某个属性的value
+	    {"authors":"fengge-gaoge","year":2888}
+
+
+      ②字符串缩进
+	var jsonText = JSON.stringify(book,null,4);
+	在每个级别缩进4个空格
+	结果:
+	 {
+	    "title":"c++",
+	    "authors":["fengge","gaoge"],
+         }
+
+
+     ③toJSON()方法
+	var book = {
+	    title:"java",
+	    "authors":["fengge","gaoge"],
+	    
+	    toJSON:fucntion(){
+		return this.title;
+	    }
+	};
+
+	var jsonText = JSON.stringify(book);
+	
+	toJSON方法返回图书的书名，这个对象被序列化为一个字符串而非对象，可以让toJSON返回任何值，
+	如果这个方法返回undefined,则返回null，而如果它是顶级对象，结果就是undefined
+
+
+    【序列化对象的顺序】
+     a.如果存在toJSON()方法而且能通过它取得有效的值，则调用该方法，否则，返回对象本身
+     b.如果提供了第二个参数(过滤器),应用过滤器，传入函数过滤器的值是 a步骤 返回的值
+     c.对 b步骤 返回的每个值进行相应的序列化
+     e.如果存在第三个参数，则执行相应的格式化
+	
+
+   3.解析选项
+     var jsonTxt = '{"name":"fengfeng","age":18}';
+     var jsObj = eval("(" + jsonTxt + ")");//千万不要用，eval太危险
+
+     var book = {
+	title:"java",
+        authors:["fengge","gaoge"],
+        edit:undefined,
+	releaseDate:new Date(2011,5,1)		  
+     }; 
+
+     var jsonText = JSON.stringify(book);
+     //releaseDate里面的Date对象已经转换为字符串了
+ 
+     
+     var bookCopy = JSON.parse(jsonText, function(key,value){
+	if(key == "releaseDate"){
+	   return new Date(value);//将字符串还原成Date对象
+	}else{
+	   return value;
+	}
+     });
+
+     alert(bookCopy.releaseDate.getFullYear());
+
+
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<province-list>
+	<province pid="10">
+		<pname>北京市</pname>
+		<city-list>
+			<city cid="1">东城区</city>
+			<city cid="2">西城区</city>
+			<city cid="3">海淀区</city>
+			<city cid="4">朝阳区</city>
+		</city-list>
+	</province>
+	<province pid="20">
+		<pname>上海市</pname>
+		<city-list>
+			<city cid="5">浦东区</city>
+			<city cid="6">浦西区</city>
+			<city cid="7">闵行区</city>
+			<city cid="8">朝阳区</city>
+		</city-list>
+	</province>
+	<province pid="30">
+		<pname>河北省</pname>
+	</province>
+	<province pid="40">
+		<pname>浙江省</pname>
+	</province>
+</province-list>

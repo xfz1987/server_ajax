@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" type="text/html" charset="utf-8"/>
+		<title>...</title>
+		<style>
+			#search{width:200px}
+			#hint{border:1px solid black;width:202px;display:none;position:absolute;}
+		</style>
+		<script src="jquery-1.11.3.js"></script>
+	</head>
+
+	<body>
+		<h1 align="center">jQuery对AJAX的支持</h1>
+		<hr size="1" color="red"/>
+		<h2>$().load()函数的使用</h2>
+		搜素框:<input id="search">
+		<div id="hint"></div>
+		<script>
+			$("#search").keyup(function(){
+				var kw = $(this).val();
+				if(kw != ""){
+					$("#hint").load("ajax_jq_study1.php?keywords="+kw);
+					$("#hint").show("slow");
+				}else{
+					$("#hint").hide("fast");
+				}
+			});			
+		</script>
+
+		<h2>jQuery.get()、jQuery.post()函数的使用</h2>
+		用户名:<input id="uname">
+		<script>
+			$("#uname").focus(function(){
+				if($("#uname_msg") != null){
+					$("#uname_msg").remove();		
+				}
+			});
+						
+			$("#uname").blur(function(){
+				/*
+				jQuery.get("ajax_jq_study2.php?id="+$(this).val(),function(){
+					//do something...
+				});
+				*/
+				jQuery.post("ajax_jq_study2.php",{id:$(this).val()},function(data){
+					if($("#uname_msg") != null){
+						$("#uname_msg").remove();		
+					}
+					if(data == "0"){//用户名可以使用
+						$("#uname").after($("<span id='uname_msg' style='color:green'>用户名可以使用</span>"));
+					}else{//用户名已存在
+						$("#uname").after($("<span id='uname_msg' style='color:red'>用户名已存在</span>"));
+					}
+					console.log(data);
+				},"text");
+			});
+		</script>
+		
+		<h2>$.ajax()函数的使用</h2>
+		用户名:<input id="uname2">
+		<script>
+			$("#uname2").blur(function(){
+				$.ajax({
+					url : "ajax_jq_study4.php",
+					type : "POST",
+					data : {id:$(this).val()},
+					dataType : "text",
+					async : true,//是否异步
+					success : function(data){
+						if(data == "0"){//用户名可以使用
+							$("#uname2").after($("<span style='color:green'>用户名可以使用</span>"));
+						}else{//用户名已存在
+							$("#uname2").after($("<span style='color:red'>用户名已存在</span>"));
+						}
+					},
+					error : function(xhr){alert("服务器出错！状态码:" + xhr.status)}
+				});
+			});
+		</script>
+
+		<h2>$.getJSON()函数的使用</h2>
+		<button>调用$.getJSON()</h2>
+		<script>
+			$("button").click(function(){
+				$.getJSON("dishes.json",function(data){
+					alert(typeof data);
+				});	
+			});
+		</script>		
+	</body>
+</html>

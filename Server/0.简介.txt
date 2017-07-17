@@ -1,0 +1,61 @@
+服务器:它侦听网络上的其他客户机提交的服务请求，并提供相应的服务，如"域名解析"、"文件下载"、"网页浏览"、"邮件收发"等
+  C/S: 客户端需要单独安装程序（socket），如 QQ  
+      弊端:升级时，每一个客户端需要升级或重新安装
+  
+  B/S: 其实也是另一种C/S，客户端只需要有浏览器即可（html+css+js+java/php）
+
+
+  手机:
+      NativeApp - Server: (C/S)开发需要多个版本
+      B/S:手机浏览器或app，例如:手机美团，只是个连接图标，其实是跳到相应自己的网站
+
+      Android-Native(java)
+      ios-Native(OC)
+
+  硬件服务器:计算机
+
+  软件服务器:服务器应用程序
+        -DNS服务器:域名解析
+	-Web服务器:用于监听客户端的HTTP或HTTPS请求，用于处理用户提交的数据或向客户端返回请求的资源（网页/文件/数据...）
+	-数据库服务器:
+	-FTP服务器:
+	-SMTP/POP3服务器:
+
+  访问服务器: URL(Unified Resource Location)地址：统一资源定位符，用于描述互联网上唯一的一个资源地址              
+	      
+	      协议://服务器IP地址或域名:端口号/资源路径?查询字符串#锚点(片段)
+     
+              * 协议:规定了客户端与服务器间通信的具体格式，如:ftp/http/smtp/dns...
+
+	      * Ip地址:可以确定互联网上唯一的一台计算机，ping
+	      
+	      * 端口号:在指定计算机上提供提供服务所监听的端口，一台计算机提供 1~65535 个端口，telnet ip port 
+
+	      * 资源路径:请求资源文件在服务器上目录位置
+
+  
+  WebServer：静态服务器和动态服务器
+      *静态Web服务器:提供的内容在任何事件由任何人访问效果都是不变的
+          * 技术:html/css/js/flv
+	  * Apache Httpd 、NginX、Microsoft IIS等
+	      * Demon: 精灵/守护/后台程序
+
+      *动态Web服务器:提供的内容在不同时间或由不同的人来访问呈现出不同的内容
+          * 技术: 
+	         jsp: HTML + JAVA      (常见JSP服务器: Tomcat、JBoss、Weblogic、WebSpere)
+	         ASPX.net: HTML + C#   (常见ASP服务器: IIS + .NETFRAMEWORK)，只能运行于windows平台
+		 PHP: HTML + PHP       (常见PHP服务器: apache + ZemdEngine)，LAMP:Linux + Apache + MySQL + PHP 开源技术组合
+          * 静态服务器+动态运行环境:Tomcat、Weblogic、WebSpere 
+          
+
+ 【学习一门新语言的步骤】
+    1.了解背景知识:历史、现状、趋势、特点、使用领域  
+    2.搭建环境: 写出HelloWorld
+    3.变量和常亮
+    4.数据类型
+    5.运算符
+    6.逻辑结构
+    7.常用关键字
+    8.通用小程序:水仙花、九九乘法、素数
+    9.常用组件:函数、对象、模式、框架、第三方组件
+   10.使用项目

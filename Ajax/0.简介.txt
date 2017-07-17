@@ -1,0 +1,115 @@
+1.什么是Ajax
+  Asynchronous JavaScript and Xml 异步的js和xml
+  * 同步和异步
+    * 同步: 某段代码正在执行时，其它代码必须等待，直到当前代码块执行完成
+    * 异步: 某段代码正在执行时，其它代码也同时执行
+  
+  * Ajax:浏览器通过 XMLHttpRequest 对象异步的局部刷新的技术
+    * 不是新技术，而是若干种技术的整合应用（HTML、CSS、JS、XML、JSON等）
+    * 2002年，Google工程师第一次提出该概念 —— Google Suggest
+    * 为了解决传统的web应用当中的"等待-响应-等待“的弊端，
+    * Ajax为了实现页面没有点击刷新、发生跳转，页面的局部内容却发生了更新等应用
+       
+2.使用
+  * 创建 XMLHttpRequest 对象
+    * 浏览器内置了AJAX核心对象（兼容性）
+    * 代替用户发送HTTP请求并接收响应
+       
+    * 其它浏览器: var xhr = new XMLHttpRequest();    
+    * IE: var xhr = new ActiveXObject("Microsoft.XMLHttp");
+    * 解决兼容性
+	function createAJAX(){
+		var xhr = null;
+		if(window.XMLHttpRequest){
+			xhr = new XMLHttpRequest();
+		}else{
+			xhr = new ActiveXObject("Microsoft.XMLHttp");
+		}
+		return xhr;
+	}
+
+        简写：
+        function createAJAX(){
+	    return (window.XMLHttpRequest != undefined) ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+        }
+  
+  * 常用属性和方法
+    * 事件类别
+       onabort: null
+       onerror: null
+       onload: null
+       onloadend: null
+       onloadstart: null
+       onprogress: null
+       *onreadystatechange: null  只要readyState值一改变，该事件立即触发
+       ontimeout: null
+    
+    * 常用属性   
+       readyState: 0       number   就绪状态:描述了AJAX对象的当前状态
+                                     0- 默认的起始状态，表示请求未创建
+				     1- 表示请求构建完成
+			             2- 表示请求数据发送完成
+				     3- 表示服务器器开始返回响应数据
+				     4- 服务器响应数据接收完成（相应头中的 HTTP/1.1 200 OK）
+				     0- 上一步完成后，自动跳到0状态
+					  
+       response: ""        string
+       responseText: ""    string   用于保存服务器返回的响应主体内容
+       responseType: ""    string
+       responseURL: ""     string
+       responseXML: null   object   XMLDocument对象，就是根对象
+       status: 0           number   用于保存服务器返回的响应状态码  200
+       statusText: ""      string   用于保存服务器返回的响应状态码对应的原因短句 OK
+       timeout: 0          number
+
+    * 常用方法
+      abort()
+      constructor()
+      getAllResponseHeaders: function getAllResponseHeaders() { [native code] }
+      getResponseHeader(string)
+      open(method,url,isAsynchronous)   : 创建一个AJAX请求 ,isAsynchronous必须为true
+      overrideMimeType() 
+      send(string)                      : POST请求开始发送请求数据，readyState会自动由 0 变为 1
+      setRequestHeader(string,string)   : 设置请求头,写在open与send中间
+              例如: xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+
+      
+
+    * GET 和 POST 请求
+      get和post请求都可以将参数放在URL后面，
+      但当POST请求的参数比较长时，要放在请求主体中
+      
+      get:xhr.open("get","URL?para1=xx&para2=xx",true);
+	  xhr.send(null);
+
+      post: xhr.open("post","URL",true);
+            xhr.send("para1=xx&para2=xx");
+	    
+	    或参数比较短时
+            xhr.open("post","URL?para1=xx&para2=xx",true);
+	    xhr.send(null);
+
+   * form表单元素 enctype(encode type) 属性:
+     指定表单中的数据(要作为POST请求消息的主体)以何种编码方式发送给服务器
+     * application/x-www-form-urlencoded : 浏览器在发送前，调用encodeURI()对特殊字符(中文)进行编码，然后再发送给服务器（默认） 
+                                           * 不能用于文件上传
+
+     * text/plain : 浏览器发送时将 空格转换为 "+" 加号，但不对特殊字符编码;
+       (一般不用)   这样,会造成 PHP服务器接收这种请求消息的主体数据
+		          而JAVA服务器虽然能收到请求消息的主体数据，但是中文或特殊字符会乱码，无法处理
+     
+     * multipart/form-data 不对字符编码,在使用包含文件上传控件的表单时，必须使用该值
+       (上传文件必须使用)
+
+
+   * 注意:
+       * Ajax发送的POST请求默认的内容编码方式是 text/plain,会造成服务器接收不到请求主体数据
+         而表单的enctype默认是 application/x-www-form-urlencoded
+       
+       * 发送请求前：设置POST请求头
+         xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=utf-8");
+
+
+3.数据传输
+  * 为了解决跨平台的数据传输，利用XML技术或JSON技术来封装数据，
+    并转化为指定编码的字符串形式进行传输（技术内容请参考：《XML》和《JSON》）

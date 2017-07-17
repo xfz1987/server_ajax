@@ -1,0 +1,67 @@
+#main .nav {
+	float: left;
+	padding: 10px 0 0 50px;
+}
+#main .nav  li{
+	margin: 10px 0 0 20px;
+}
+#main .nav .current {
+	color: #e4393c;
+	font-weight: bold;
+}
+#main .body {
+	float: left;
+	background: #fefefe;
+	width: 950px;
+	min-height:300px;
+	margin-left: 85px;
+}
+#orderContainer table {
+	border-collapse: collapse;
+	border: 1px solid #e7e7e7;
+	width: 100%;
+}
+#orderContainer table th, #orderContainer table td {
+	border: 1px solid #e7e7e7;
+	padding: 8px;
+}
+#orderContainer table thead {
+	background: #e7e7e7;
+}
+#orderContainer .orderHeader {
+	background: #f5f5f5;	
+}
+#orderContainer .orderHeader  a {
+	margin-left: 100px;
+	color: #005ea7;
+}
+#orderContainer .pager  li{
+	float: left;
+	margin: 20px 10px;
+	border: 1px solid #aaa;
+	background: #fff;
+	padding: 8px;
+}
+#orderContainer .pager li.current {
+	border: none;
+	color:blue;
+}
+#orderContainer .pager li:hover{
+	background:yellow;
+	color:#fff;
+}
+#lotteryContainer{
+	text-align: center;
+}
+#lotteryContainer button{
+	width: 288px;
+	height: 3em;
+	border: 1px solid #fafafa;
+	margin: 10px 0;
+	border-radius: 8px;
+	outline: none;
+}
+#lotteryContainer button:hover{
+	background: #eee;
+}
+

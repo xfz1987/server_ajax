@@ -1,0 +1,76 @@
+1.关系型数据库（RDBMS:relational DataBase Managment System）
+  包含多个库，每个库包含多个表，每个表包含多行，每行包含多个字段
+  SQLite:手机中的微型数据库
+  MySQL:瑞典公司，后来被sun收购了
+  SQL Server:只能用在windows上
+  oracle:收购了sun公司
+  DB2:IBM公司
+ 
+ mySQL:
+     ①默认端口:3306
+     ②连接: mysql.exe -h服务器地址 -P服务器端口 -u用户名 -p密码 -D库名
+             mysql.exe -hlocalhost -P3306 -uroot -p -D库名
+     ③使用:
+        * show databases:显示当前服务器中有哪些库
+	* use XXX: 使用指定的库
+	* show tables: 显示当前库有哪些表
+	* desc xxx: 显示某个表的数据结构
+        * DDL: create drop alter truncate
+	* DML: insert update delete
+	* DQL: select
+	* DCL: grant revoke
+    
+     ④应用
+       a.命令行使用单条语句:sql语句
+       b.命令行执行sql脚本:source sql脚本文件
+       
+       /*多行注释*/
+       #DROP DATABASE IF EXISTS gzf_test;       
+       DROP DATABASE IF EXISTS gzf_test;
+       CREATE DATABASE gzf_test CHARSET utf8;
+       
+       use gzf_test;
+ 
+       --创建表
+       CREATE TABLE emp(
+          id INT primary key,
+          name VARCHAR(32) not null,
+          hiredate DATE,
+          salary DOUBLE(9,2)   --总长度为9,其中小数位为2
+       );
+	
+       --增
+       INSERT INTO emp VALUES(1,"峰哥",2015-08-29,30000.00);
+       INSERT INTO emp VALUES(2,"tom",2015-08-29,10000.00);
+       
+       -删
+       delete from emp where id="2";
+
+       -改
+       update emp set hiredate="2015-08-25";
+
+       -查
+       select * from emp where name="峰哥";
+       select distinct name from emp;
+
+       -分页
+       limit start,count
+         - start:从哪一条开始读取,下标从0开始;
+	 - count:指定此次读取的最多的条数;
+       -例如: pageSize:每页多少条 pageNo:页号 rowCount:总记录行数 pageCount:页数
+              limit 0,5  行号0~4
+	      limit 5,5  行号5~9
+              limit 10,5 行号10~5
+	      
+	      分页:limit pageSize*(pageNo - 1),pageSize
+	      公式:if(rowCount%pageSize == 0){
+			pageCount = rowCount/pageSize; 
+		   }else{
+			pageCount = rowCount/pageSize + 1;
+		   }
+		   PHP: pageCount = ceil(rowCount/pageSize);
+	     
+	     
+
+
+2.对象型数据库（未来的发展方向）

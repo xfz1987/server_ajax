@@ -1,0 +1,7 @@
+1.将PHP的数据对象转换为JSON字符串
+  $jsonTxt = json_encode($xxx);
+  注意:在最前面设置响应输出头
+        header("Content-Type:application/json;charset=UTF-8");
+
+2.将JSON字符串转换为PHP的数据对象
+  json_decode($jsonTxt)

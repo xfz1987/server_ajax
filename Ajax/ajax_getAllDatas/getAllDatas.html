@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" type="text/html" charset="utf-8"/>
+		<title>.....</title>
+		<script>
+			function getXHR(){
+				return (window.XMLHttpRequest != undefined) ? (new XMLHttpRequest()) : (new ActiveXObject("Microsoft.XMLHttp"));
+			}
+
+			function trim(arr){
+				for(var i=0,arry=[],len=arr.length;i<len;i++){
+					if(arr[i] != 0){
+						arry.push(arr[i]);
+					}
+				}
+				return arry;
+			}
+
+			function inputUl(data,ul){
+				var arr = trim(data.split("#"));
+				for(var i=0,len=arr.length;i<len;i++){
+					var li = doc.createElement("li");
+					li.innerHTML = arr[i];
+					ul.appendChild(li);
+				}
+			}
+			var doc = document;
+		</script>
+	</head>
+
+	<body>
+		<h1 align="center">使用Ajax向服务请求各种类型的数据</h1>
+		<hr size="1" color="red"/>
+		<h2>text/plain函数</h2>
+		<ul id="list1"></ul>
+		<script>
+			var xhr1 = getXHR();
+			xhr1.onreadystatechange = function(){
+				if(xhr1.readyState == 4){
+					if(xhr1.status == 200){
+						inputUl(xhr1.responseText,doc.getElementById("list1"));
+					}
+				}
+			};
+			xhr1.open("GET","dishes.txt",true);
+			xhr1.send(null);
+		</script>
+
+		<h2>text/html函数</h2>
+		<ul id="list2"></ul>
+		<script>
+			var xhr2 = getXHR();
+			xhr2.onreadystatechange = function(){
+				if(xhr2.readyState == 4){
+					if(xhr2.status == 200){
+						var reHTML = xhr2.responseText;
+						var expr = /<\/?li>/g
+						var data = reHTML.replace(expr,"#");
+						inputUl(data,doc.getElementById("list2"));
+					}
+				}
+			};
+			xhr2.open("GET","dishes.html",true);
+			xhr2.send(null);
+		</script>
+
+		<h2>text/xml函数</h2>
+		<ul id="list3"></ul>
+		<script>
+			var xhr3 = getXHR();
+			xhr3.onreadystatechange = function(){
+				if(xhr3.readyState == 4){
+					if(xhr3.status == 200){
+						var xmlDoc = xhr3.responseXML;
+						var dish_list = xmlDoc.getElementsByTagName("dish");
+						var ul = doc.getElementById("list3")
+						for(var i=0,len=dish_list.length;i<len;i++){
+							var li = doc.createElement("li");
+							li.innerHTML = dish_list[i].innerHTML;
+							ul.appendChild(li);
+						}
+					}
+				}
+			};
+			xhr3.open("GET","dishes.xml",true);
+			xhr3.send(null);
+		</script>
+
+		<h2>application/json函数</h2>
+		<ul id="list4"></ul>
+		<script>
+			var xhr4 = getXHR();
+			xhr4.onreadystatechange = function(){
+				if(xhr4.readyState == 4){
+					if(xhr4.status == 200){
+						var reTxt = xhr4.responseText;
+						//将json字符串准换为js对象
+						var jsObj = JSON.parse(reTxt);
+						var ul = doc.getElementById("list4");
+						for(var i=0,len=jsObj.length;i<len;i++){
+							var li = doc.createElement("li");
+							li.innerHTML = jsObj[i]["dname"];
+							ul.appendChild(li);
+						}
+					}
+				}
+			};
+			xhr4.open("GET","dishes.php",true);
+			xhr4.send(null);
+		</script>
+
+	</body>
+</html>

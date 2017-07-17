@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" type="text/html" charset="utf-8"/>
+		<script src="jquery-1.11.3.js"></script>
+		<title>留言板</title>
+		<style>
+			.comments {
+				list-style: none;
+				padding: 0;
+			}
+			.comment {
+				border: 1px solid #aaa;
+				padding: 10px;
+			}
+			.comment .header {
+				border-bottom: 1px solid #aaa;
+				padding: 8px;
+				font-weight: bold;
+			}
+			.comment .header>span{
+				display:inline-block;
+				width:300px;
+			}
+			.comment .body {
+				padding: 8px;
+			}
+			textarea {
+				vertical-align: top;
+			}
+			#commentResult {
+				padding: 10px;
+				border: 1px solid #2a2;
+				background: #efe;
+				display:none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1 align="center">留言板</h1>
+		<hr size="1" color="red"/>
+		<ul class="comments"></ul>
+
+		<h2>发表新留言</h2>
+		<p id="commentResult">留言发表成功！此留言的系统编号为：10</p>
+		<form id="ping_form">
+			您的姓名：<input type="text" name="uname"><br>
+			留言内容：<textarea name="content" cols="30" rows="5"></textarea><br>
+			<input type="button" value="发表留言">
+		</form>
+
+		<script>
+			Date.prototype.format = function(){
+				var year = this.getFullYear();
+				var month = this.getMonth() + 1;
+				var day = this.getDate();
+				var ary = new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六","星期日");
+				var xingqi = ary[this.getDay()];
+				var hour = this.getHours();
+				var minutes = this.getMinutes();
+				var seconds = this.getSeconds();
+				var dn = "AM"
+				if(hour > 12){
+					dn = "PM";
+					hour = hour - 12;
+				}
+				if(hour == 0){
+					hour = 12;
+				}
+				return year + "年 " + month + "月" + day + "日" +  hour + "时" + minutes + "分" + seconds + "秒 ";		
+			}; 
+
+			function loadData(data){
+				for(var i=0,len=data.length;i<len;i++){
+						var date = new Date(parseInt(data[i].pubtime));
+						var str = "<li class='comment'>" 
+								+	   "<div class='header'>"
+								+          "<span>发布人：" +  data[i].uname + "</span>"
+								+          "<span>发布时间：" + date.format() + "</span>"
+								+      "</div>"
+								+      "<div class='body'>" + data[i].content + "</div>"
+								+ "</li>";
+						$(".comments").append($(str));
+				}
+			}
+
+			$(function(){
+				$.getJSON("comment_all.php",function(data){
+					loadData(data);
+				});
+			});
+
+			$("[value=发表留言]").click(function(){
+				var data = $("#ping_form").serialize() + "&pubtime=" + new Date().getTime();
+				$.post("comment_add.php",data,function(txt){
+					if(txt == -1){
+						alert("服务器出错，请联系管理员");
+					}else{
+						$("#commentResult").html("留言发表成功！此留言的系统编号为：" + txt).show(1000);
+
+						setTimeout(function(){
+							$("#commentResult").hide(1000);
+							$("input[name=uname]").val("");
+							$("textarea").html("");
+							$.getJSON("comment_all.php?cid=" + parseInt(txt),function(data){
+								loadData(data);
+							});
+						},3000);			
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

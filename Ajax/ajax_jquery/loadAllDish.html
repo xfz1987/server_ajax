@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>.....</title>
+		<style>
+			.block {
+				display: block;
+				background: #fff;
+				border: 1px solid #aaa;
+				height: 30px;
+				width: 100%;
+				outline: 0;
+				margin: 10px 0;
+				cursor: pointer;
+			}
+			.block:hover {
+				background: #eee;
+			}
+			#dishUL {
+				list-style: none;
+				padding: 0;
+			}
+			.left {
+				float: left;
+			}
+			.dish {
+				clear: both;
+				border: 1px solid #aaa;
+				padding: 5px;
+				overflow: hidden;
+			}
+		</style>
+		<script src="jquery-1.11.3.js"></script>
+	</head>
+	<body>
+		<h1>菜品列表</h1>
+		<ul id="dishUL">
+			<!--<li class="dish">
+				<div class="left">
+					<img src="img/p0281.jpg">
+				</div>
+				<div class="left">
+					<h3>【开胃大侠】</h3>
+					<p>原料：大侠，葱花，盐味精</p>
+				</div>
+			</li>-->
+		</ul>
+		<button class="block">加载更多</button>
+
+		<script>
+			$('button:contains(加载更多)').on('click',  function(){
+					console.log('开始加载更多菜品...');
+					$.getJSON('dishes_all.json',function(data){
+						console.log(data);
+						for(var i=0,len=data.length;i<len;i++){
+							var d = data[i];
+							$("#dishUL").append($( 
+								"<li class='dish'><div class='left'><img src='img/" + d.img + "' title="
+								+ d.img_l + "></div><div class='left'><h3>" + d.name + "</h3><p>" + d.material + "</p></div></li>")
+							)
+						}
+					});
+			});
+		</script>
+	</body>
+</html>
